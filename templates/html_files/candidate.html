@@ -1,0 +1,95 @@
+<html>
+{% load static %}
+{% load myfilter %}
+    <head>
+        <title>Resume</title>
+         <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js.map' %}"></script>
+    <link href="{% static 'css/bootstrap.css.map' %}" rel="stylesheet">
+    <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+    <link rel="shortcut icon" type="image/jpg" href="{% static 'images/icon.jpg' %}">
+    <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <style>
+        .table, .th, .td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            }
+    </style>
+    </head>
+    <body>
+        <div class="container-fluid mt-1" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+    <h1 class="text-center p-3"><span style="border-bottom:2px double blue;">Resume</span></h1>   
+    <div class="row mt-1">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-8 shadow p-5 offset-sm-1">
+           <div class="shadow p-1">
+               <img src="{{candidate.profile_image.url}}" alt=""
+           class="img-fluid img-thumbnail float-end round" width="150" height="350">
+           <p class="mt-4">NAME: <b style="margin-left:50px;">{{candidate.name}}</b></p>
+           <p>DOB: <b style="margin-left:60px;">{{candidate.dob}}</b></p>
+           <p>GENDER: <b style="margin-left:30px;">{{candidate.gender}}</b></p> 
+           <p>MOBILE NO: <b style="margin-left:10px;">{{candidate.mobile}}</b></p>
+           <p>EMAIL ID: <b style="margin-left:20px;">{{candidate.email}}</b></p>
+           <p>ADDRESS: <b style="margin-left:25px;">{{candidate.locality}}, {{candidate.city}}, {{candidate.state}} - {{candidate.pin}}</b></p>
+           </div>
+           <div class="mt-5 shadow">
+               <h2 class="text-primary"><span style="border-bottom:5px double gold;">INTRODUCTION:</span></h2>
+               <h6 style="text-align:justify;"><b>
+                   {{candidate.intro}}
+               </b></h6>
+           </div>
+           <div class="mt-5 shadow">
+                <table style="width:100%;" class="table">
+                    <tr class="h4">
+                        <th class="th">QULIFICATION</th>
+                        <th class="th">SCHOOL/COLLAGE</th>
+                        <th class="th">CGPA/PERCENT</th>
+                    </tr>
+                    <tr class="h5">
+                        <td class="td">{{candidate.qulification}}</td>
+                        <td class="td">{{candidate.clg_name}}</td>
+                        <td class="td">{{candidate.percentage}}</td>
+                    </tr>
+                </table>
+           </div>
+           <div class="mt-3" style="border-bottom:4px groove blue;"></div>
+           <div class="row">
+               <div class="col-sm-6 mt-4" style="border-right:4px groove blue;">
+                   <h3 class="text-primary"><span style="border-bottom:5px double gold;">Preferred JOB CITIES: </span></h3>
+                   <h5 class="mt-4" style="margin-left:30px;"><b>{{candidate.job_city|remove_special:"[]'"}}</b></h5>
+                    <h5 class="mt-3">YOUR SKILLS: </h5>
+                    &nbsp;&nbsp;<b style="text-align:justify;">{{candidate.skills}}</b>
+               </div>
+               <div class="col-sm-6 mt-4" style="padding-left:50px;">
+                   <h2 class="text-primary"><span style="border-bottom:5px double gold;">PROJECTS:</span></h2>
+                   <ul class="mt-4">
+                       <li><h5><b>{{candidate.projects|remove_special:"[]'"}}</b></h5></li>
+                   </ul>
+                    <h5 class="mt-5">ATTACHMENT: <a href="{{candidate.my_file.url}}" download><b>Download File</b><span></span></a></h5>
+               </div>
+           </div>
+           <script>
+               let button = document.querySelector("a");
+               button.addEventListener("click",()=>{
+                   const span = document.querySelector("a span");
+                   button.style.paddingRight = '10px';
+                   span.style.visibility = "visible";
+                   setTimeout(()=>{
+                       span.style.visibility="hidden";
+                       button.style.transition = "1s ease-in-out"; 
+                       button.style.paddingRight = "0px";
+                   },1000);
+               })
+           </script>
+        </div>
+        <div class="text-center mt-5">
+            <a href="http://127.0.0.1:8000/resume/" class="btn btn-primary">Home</a>
+        </div>
+    </div>
+</div>
+    </body>
+</html>
